@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :first_name, :last_name, presence: true
   validates :description, length: { maximum: 4_096 }  # Do not allow the user to save HUGE amounts of data to a text column. This limit is completely artbitrary.
 end

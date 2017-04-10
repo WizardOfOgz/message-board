@@ -30,8 +30,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string :first_name
-      t.string :last_name
+      t.string :first_name, null: false
+      t.string :last_name, null: false
       t.string :description, limit: 4_096  # Prevent a user from writing HUGE amounts of data to this column. The 4k limit is artbitrary.
 
       t.timestamps null: false
