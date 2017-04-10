@@ -32,7 +32,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.string :first_name
       t.string :last_name
-      t.string :description, limit: 4.kilobytes  # Note that the 4k limit is actually characters, not bytes.
+      t.string :description, limit: 4_096  # Prevent a user from writing HUGE amounts of data to this column. The 4k limit is artbitrary.
 
       t.timestamps null: false
     end
