@@ -1,9 +1,9 @@
-class PostsController < ApplicationController
+class PostsController < ::BaseController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = current_user.posts.all
   end
 
   # GET /posts/1
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
 
   # GET /posts/1/edit
