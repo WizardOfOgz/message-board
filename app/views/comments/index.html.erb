@@ -16,7 +16,7 @@
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.post.title %></td>
-        <td><%= comment.user.name %></td>
+        <td><%= comment.author_name %></td>
         <td><%= comment.body %></td>
         <td><%= link_to 'Show', [comment.post, comment] %></td>
         <td><%= link_to 'Edit', polymorphic_path([:edit, comment.post, comment]) %></td>

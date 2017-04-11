@@ -23,7 +23,7 @@ class CommentsController < ::BaseController
   # POST /comments
   def create
     @comment = current_user.posts.find(params[:post_id]).comments.build(comment_params)
-    @comment.user = current_user
+    @comment.author = current_user
 
     if @comment.save
       redirect_to [@comment.post, @comment], notice: 'Comment was successfully created.'
