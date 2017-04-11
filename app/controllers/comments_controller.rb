@@ -26,7 +26,7 @@ class CommentsController < ::BaseController
     @comment.author = current_user
 
     if @comment.save
-      redirect_to [@comment.post, @comment], notice: 'Comment was successfully created.'
+      redirect_to @comment.post, notice: 'Comment was successfully created.'
     else
       render :new
     end
@@ -35,7 +35,7 @@ class CommentsController < ::BaseController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to [@comment.post, @comment], notice: 'Comment was successfully updated.'
+      redirect_to @comment.post, notice: 'Comment was successfully updated.'
     else
       render :edit
     end

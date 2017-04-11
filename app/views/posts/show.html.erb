@@ -17,6 +17,10 @@
     <% @post.comments.order(created_at: :asc).includes(:author).each do |comment| %>
       <%= render comment %>
     <% end %>
+
+    <% @post.comments.select(&:new_record?).each do |comment| %>
+      <%= render "comments/form", comment: comment %>
+    <% end %>
   </section>
 </article>
 

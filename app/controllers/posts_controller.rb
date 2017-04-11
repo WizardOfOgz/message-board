@@ -8,6 +8,7 @@ class PostsController < ::BaseController
 
   # GET /posts/1
   def show
+    @post.comments.build  # New record for comment form.
   end
 
   # GET /posts/new
