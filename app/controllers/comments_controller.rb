@@ -3,8 +3,8 @@ class CommentsController < ::BaseController
 
   # GET /comments
   def index
-    @post = current_user.posts.find(params[:post_id])
-    @comments = @post.comments.all
+    @post = Post.includes(:author).find(params[:post_id])
+    @comments = @post.comments.order(created_at: :asc).includes(:author).all
   end
 
   # GET /comments/1
@@ -13,7 +13,7 @@ class CommentsController < ::BaseController
 
   # GET /comments/new
   def new
-    @comment = current_user.posts.find(params[:post_id]).comments.build
+    @comment = Post.find(params[:post_id]).comments.build
   end
 
   # GET /comments/1/edit
@@ -22,7 +22,7 @@ class CommentsController < ::BaseController
 
   # POST /comments
   def create
-    @comment = current_user.posts.find(params[:post_id]).comments.build(comment_params)
+    @comment = Post.find(params[:post_id]).comments.build(comment_params)
     @comment.author = current_user
 
     if @comment.save
@@ -50,7 +50,7 @@ class CommentsController < ::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = current_user.posts.find(params[:post_id]).comments.find(params[:id])
+      @comment = Post.find(params[:post_id]).comments.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

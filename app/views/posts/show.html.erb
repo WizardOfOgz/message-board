@@ -11,7 +11,10 @@
     <p><%= @post.body %></p>
   </section>
   <section>
-    <% @post.comments.each do |comment| %>
+    <header>
+      <h1>Comments</h1>
+    </header>
+    <% @post.comments.order(created_at: :asc).includes(:author).each do |comment| %>
       <%= render comment %>
     <% end %>
   </section>
