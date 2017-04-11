@@ -28,7 +28,11 @@ class CommentsController < ::BaseController
     if @comment.save
       redirect_to @comment.post, notice: 'Comment was successfully created.'
     else
-      render :new
+      if request.xhr?
+        render partial: "form", locals: { comment: @comment }
+      else
+        render :new
+      end
     end
   end
 

@@ -1,3 +1,3 @@
-class BaseController < ::ActionController::Base
+class BaseController < ::ApplicationController
   before_action :authenticate_user!, unless: :devise_controller?
 end
