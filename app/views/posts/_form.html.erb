@@ -17,6 +17,7 @@
   <div class="form-group">
     <%= f.label :body %>
     <%= f.text_area :body, class: "form-control" %>
+    <%= render "/shared/markdown_tip" %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>

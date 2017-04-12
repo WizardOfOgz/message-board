@@ -13,6 +13,7 @@
   <div class="form-group">
     <%= f.label :body, class: "sr-only" %>
     <%= f.text_area :body, class: "form-control" %>
+    <%= render "/shared/markdown_tip" %>
   </div>
   <div class="actions">
     <%= f.submit comment.new_record? ? "Add comment" : "Update comment", class: "btn btn-primary" %>
