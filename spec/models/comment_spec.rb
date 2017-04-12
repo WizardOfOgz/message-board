@@ -19,4 +19,11 @@ RSpec.describe ::Comment, type: :model do
       expect(post.author_name).to be_nil
     end
   end
+
+  describe "#content" do
+    it "returns the body with markdown processing" do
+      post = ::FactoryGirl.build(:comment, body: "Hello, **world!**")
+      expect(post.content).to eq("<p>Hello, <strong>world!</strong></p>\n")
+    end
+  end
 end

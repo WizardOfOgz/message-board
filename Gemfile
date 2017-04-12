@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+# TODO: Use tighter version specs for gems. It won't matter much here, but it would for long-term projects. •
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
@@ -22,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 
 gem 'devise'
+
+gem 'redcarpet'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
