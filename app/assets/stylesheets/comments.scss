@@ -1,3 +1,14 @@
-// Place all the styles related to the Comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "palette";
+
+.comment {
+  margin: 0;  // Cancels Bootstrap margin on .media
+  padding: 1em 0 0.5em;
+
+  .avatar {
+    font-size: 3em;
+    color: $clr-ntr-primary;
+  }
+  + .comment {
+    border-top: 1px solid $clr-ntr-secondary;
+  }
+}

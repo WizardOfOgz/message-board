@@ -1,10 +1,17 @@
-<article>
-  <p><%= comment.body %></p>
-  <footer>
-    <p>
-      Posted on
-      <time datetime="<%= comment.created_at.strftime("%F %T%:z") %>"><%= comment.created_at.strftime("%F") %></time>
-      by <%= comment.author_name %>.
-    </p>
-  </footer>
+<article class="comment media">
+  <div class="media-left">
+    <span class="glyphicon glyphicon-user avatar"></span>
+  </div>
+  <div class="media-body">
+    <%= comment.content.html_safe %>
+    <footer>
+      <p>
+        <small>
+          Posted on
+          <time datetime="<%= comment.created_at.strftime("%F %T%:z") %>"><%= comment.created_at.strftime("%F") %></time>
+          by <%= comment.author_name %>.
+        </small>
+      </p>
+    </footer>
+  </div>
 </article>

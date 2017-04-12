@@ -1,21 +1,20 @@
-<%= form_for([comment.post, comment], remote: true, authenticity_token: true) do |f| %>
+<%= form_for([comment.post, comment], remote: true, authenticity_token: true, html: { class: "comment" }) do |f| %>
   <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <h4><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h4>
       <ul>
-      <% comment.errors.full_messages.each do |message| %>
+        <% comment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
+  <div class="form-group">
+    <%= f.label :body, class: "sr-only" %>
+    <%= f.text_area :body, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit comment.new_record? ? "Add comment" : "Update comment", class: "btn btn-primary" %>
   </div>
 <% end %>

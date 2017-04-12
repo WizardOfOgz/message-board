@@ -1,25 +1,26 @@
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <h4><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h4>
       <ul>
-      <% @post.errors.full_messages.each do |message| %>
+        <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
   </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit "Delete", class: "btn btn-danger", name: "_method", value: "Delete" %>
+    <%= link_to "Cancel", @post.new_record? ? posts_path : @post %>
   </div>
 <% end %>

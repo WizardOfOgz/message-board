@@ -1,5 +1,6 @@
 class PostsController < ::BaseController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authenticate_user!, only: %i[index show]
+  before_action :set_post, only: %i[show edit update destroy]
 
   # GET /posts
   def index

@@ -1,28 +1,51 @@
-<article>
-  <header>
-    <h1><%= @post.title %></h1>
-    <p>
-      Posted on
-      <time datetime="<%= @post.created_at.strftime("%F %T%:z") %>"><%= @post.created_at.strftime("%F") %></time>
-      by <%= @post.author_name %>.
-    </p>
-  </header>
-  <section>
-    <p><%= @post.body %></p>
+<% content_for(:breadcrumbs) do %>
+  <li><a href="<%= posts_path %>">Posts</a></li>
+  <li class="active"><%= @post.title %></li>
+<% end %>
+
+<article class="media post">
+  <div class="media-body">
+    <header class="media-heading">
+      <h1><%= @post.title %></h1>
+      <p>
+        <small>
+          Posted on
+          <time datetime="<%= @post.created_at.strftime("%F %T%:z") %>"><%= @post.created_at.strftime("%F") %></time>
+          by <%= @post.author_name %>.
+        </small>
+      </p>
+    </header>
+    <p><%= @post.content.html_safe %></p>
+  </div>
+  <div class="media-right">
+    <span class="glyphicon glyphicon-comment avatar"></span>
+  </div>
+
+  <section class="actions">
+    <% if @post.author == current_user %>
+      <a class="btn btn-default" href="<%= edit_post_path(@post) %>">
+        <span class="glyphicon glyphicon-edit"></span> Edit
+      </a>
+    <% end %>
+    <a href="<%= posts_path %>">Back to Posts</a>
   </section>
+
   <section>
     <header>
-      <h1>Comments</h1>
+      <h3>Comments</h3>
     </header>
-    <% @post.comments.order(created_at: :asc).includes(:author).each do |comment| %>
-      <%= render comment %>
-    <% end %>
 
-    <% @post.comments.select(&:new_record?).each do |comment| %>
-      <%= render "comments/form", comment: comment %>
-    <% end %>
+    <section class="media-list">
+      <%= render @post.comments.order(created_at: :asc).includes(:author) %>
+      <% if current_user %>
+        <% @post.comments.select(&:new_record?).each do |comment| %>
+          <%= render "comments/form", comment: comment %>
+        <% end %>
+      <% else %>
+        <div class="actions">
+          <%= link_to "Log in to comment", new_user_session_path %>
+        </div>
+      <% end %>
+    </section>
   </section>
 </article>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
