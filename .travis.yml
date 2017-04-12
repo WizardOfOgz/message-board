@@ -1,5 +1,10 @@
 language: ruby
 rvm:
- - 2.3.3
-# uncomment and edit the following line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec
+  - 2.3.3
+cache: bundler
+addons:
+  postgresql: "9.4"
+before_script:
+  - psql -c 'create database message_board_test;' -U postgres
+  - cp config/database.travis.yml config/database.yml
+script: bundle exec rspec spec --order random

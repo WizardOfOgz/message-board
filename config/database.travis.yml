@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  database: message_board_test
+  username: postgres
+  password:
+  timeout: 5000
+  encoding: utf8
+  pool: 5
